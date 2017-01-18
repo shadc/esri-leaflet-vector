@@ -24,16 +24,16 @@ export function fetchMetadata (url, context) {
   }, context);
 }
 
-export function isObject(item) {
+export function isObject (item) {
   return (item && typeof item === 'object' && !Array.isArray(item));
 }
 
-export function mergeStyles(target, source) {
+export function mergeStyles (target, source) {
   if (isObject(target) && isObject(source)) {
     for (var key in source) {
       var keyObj = {};
       if (isObject(source[key])) {
-        if (Array.isArray(target[key])){
+        if (Array.isArray(target[key])) {
           target[key].unshift(source[key]);
         } else {
           keyObj[key] = {};
@@ -78,12 +78,12 @@ export function formatStyle (style, metadata, styleUrl, options) {
     maxzoom: metadata.maxzoom ? metadata.maxzoom : 22
   };
 
-  if (options.showAerial){
+  if (options.showAerial) {
     style.sources.esriAerial = {
       type: 'raster',
       tileSize: 256,
       tiles: ['https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-      'https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
+              'https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}']
     };
     style.layers.unshift({
       id: 'esriAerial',
@@ -91,10 +91,10 @@ export function formatStyle (style, metadata, styleUrl, options) {
       source: 'esriAerial'
     });
     var copyright = 'Source: Esri, DigitalGlobe, GeoEye, Earthstar Geographics, CNES/Airbus DS, USDA, USGS, AeroGRID, IGN, and the GIS User Community';
-    map.attributionControl.addAttribution(copyright);
+    this._map.attributionControl.addAttribution(copyright);
   }
 
-  if (options.mapboxglStyleJson){
+  if (options.mapboxglStyleJson) {
     mergeStyles(style, options.mapboxglStyleJson);
   }
 
