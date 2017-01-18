@@ -41,7 +41,7 @@ export var Layer = L.Layer.extend({
                 styleUrl = tileUrl + tileMetadata.defaultStyles + '/root.json';
                 request(styleUrl, {}, function (error, style) {
                   if (!error) {
-                    formatStyle(style, tileMetadata, styleUrl, options.rasterBasemap);
+                    formatStyle(style, tileMetadata, styleUrl, options);
 
                     this._mapboxGL = L.mapboxGL({
                       accessToken: 'ezree',
