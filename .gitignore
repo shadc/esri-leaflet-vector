@@ -35,4 +35,6 @@ node_modules
 dist/
 debug/*.html
 !debug/sample.html
+!debug/sample2.html
+
 

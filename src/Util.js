@@ -78,7 +78,7 @@ export function formatStyle (style, metadata, styleUrl, options) {
     maxzoom: metadata.maxzoom ? metadata.maxzoom : 22
   };
 
-  if (options.showAerial) {
+  if (options && options.showAerial) {
     style.sources.esriAerial = {
       type: 'raster',
       tileSize: 256,
@@ -90,11 +90,9 @@ export function formatStyle (style, metadata, styleUrl, options) {
       type: 'raster',
       source: 'esriAerial'
     });
-    var copyright = 'Source: Esri, DigitalGlobe, GeoEye, Earthstar Geographics, CNES/Airbus DS, USDA, USGS, AeroGRID, IGN, and the GIS User Community';
-    this._map.attributionControl.addAttribution(copyright);
   }
 
-  if (options.mapboxglStyleJson) {
+  if (options && options.mapboxglStyleJson) {
     mergeStyles(style, options.mapboxglStyleJson);
   }
 

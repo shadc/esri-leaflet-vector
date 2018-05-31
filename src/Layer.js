@@ -31,6 +31,12 @@ export var Layer = L.Layer.extend({
             if (metadata.accessInformation) {
               this._copyrightText = metadata.accessInformation;
             }
+            // TODO:  THIS IS PROBABLY NOT THE BEST PLACE TO SET THE ATTRIBUTION.  CONSULT WITH JOHN ABOUT THE BEST WAY TO ADD ATTRIBUTION FOR THIS LAYER.
+            // This might be a better option in the onAdd event... esriLeaflet.Util._getAttributionData('https://static.arcgis.com/attribution/World_Imagery', map);
+            if (options.showAerial) {
+              var copyright = 'Source: Esri, DigitalGlobe, GeoEye, Earthstar Geographics, CNES/Airbus DS, USDA, USGS, AeroGRID, IGN, and the GIS User Community';
+              this._copyrightText = (this._copyrightText) ? this._copyrightText += ', ' + copyright : this._copyrightText = copyright;
+            }
             request(tileUrl, {}, function (error, tileMetadata) {
               if (!error) {
                 // right now ArcGIS Pro published vector services have a slightly different signature
@@ -82,7 +88,7 @@ export var Layer = L.Layer.extend({
     map.off('moveend', Util._updateMapAttribution);
     map.removeLayer(this._mapboxGL);
 
-    if (map.attributionControl) {
+    if (map.attributionControl && document.getElementsByClassName('esri-dynamic-attribution')[0]) {
       var vectorAttribution = document.getElementsByClassName('esri-dynamic-attribution')[0].outerHTML;
       // this doesn't work, not sure why.
       map.attributionControl.removeAttribution(vectorAttribution);
