@@ -93,9 +93,29 @@
         }
     }
 
+
+    var myCustomStyle = {
+        "sources": {
+            "myCustomStyle": {
+                "type": "raster",
+                "tileSize": 256,
+                "tiles": ["https://maps.deschutes.org/arcgis/rest/services/Dial/DOQ_Deschutes_1ft/MapServer/tile/{z}/{y}/{x}",
+                    "https://maps.deschutes.org/arcgis/rest/services/Dial/DOQ_Deschutes_1ft/MapServer/tile/{z}/{y}/{x}"
+                ],
+            }
+        },
+        "layers": {
+            "id": "myCustomStyle",
+            "type": "raster",
+            "source": "myCustomStyle"
+        }
+    }
+
+
+
     L.esri.Vector.layer({
         id: 'dc6652032c464b7084bed332aacff632',
-        mapboxglStyleJson: myEsriStyle
+        mapboxglStyleJson: myCustomStyle,
         //showAerial: true
     }).addTo(map); //Ref Map
 
@@ -110,17 +130,6 @@
     //  [43.504736854976954, -122.178955078125],
     //  [44.492586962886044, -119.82238769531251]
     //]
-
-    
-
-    //setTimeout(function () {
-
-    //    console.log(document.getElementsByClassName('esri-dynamic-attribution'));
-
-    //    map.remove();
-    //}, 5000);
-
-
 
 </script>
 </body>
