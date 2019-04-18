@@ -50,7 +50,14 @@ export function formatStyle (style, metadata, styleUrl) {
     ],
     description: metadata.description,
     name: metadata.name,
-    maxzoom: metadata.maxzoom ? metadata.maxzoom : 18
+    /* mapbox-gl-js does not respect the indexing of esri tiles
+    because we cache to different zoom levels depending on feature density. articifially capping at 15, but 404s will still be encountered when zooming in tight in rural areas.
+
+    the *real* solution would be to make intermittent calls to our tilemap and update the maxzoom of the layer internally.
+
+    reference implementation: https://github.com/openstreetmap/iD/pull/5029
+    */
+    maxzoom: 15
   };
 
   if (style.glyphs.indexOf('http') === -1) {
